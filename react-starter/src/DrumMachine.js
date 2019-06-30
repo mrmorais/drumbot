@@ -77,6 +77,23 @@ export default class DrumMachine extends React.Component {
     );
   }
 
+  changeTempo = (delta) => {
+    this.stopClock();
+    this.setState(prevState => ({
+      pattern: { ...prevState.pattern, beatsPerMinute: prevState.pattern.beatsPerMinute+delta }
+    }), ()=> {
+      this.startClock();
+    });
+  }
+
+  tempoUp = () => {
+    this.changeTempo(3);
+  }
+
+  tempoDown = () => {
+    this.changeTempo(-3);
+  }
+
   nextPattern = () => {
     this.selectPattern(this.state.patternIndex + 1);
   }
@@ -104,7 +121,7 @@ export default class DrumMachine extends React.Component {
       );
     }
 
-    const { pattern: { tracks, name }, position: { step } } = this.state;
+    const { pattern: { tracks, name, beatsPerMinute }, position: { step } } = this.state;
 
     return (
       <div className='DrumMachine'>
@@ -119,15 +136,26 @@ export default class DrumMachine extends React.Component {
           </div>
           {this.state.poweredOn && (
             <>
+              <div className='DrumMachine__TempoSelector'>
+                <div className='DrumMachine__PatternButton'>
+                  <button onClick={this.tempoUp}>▲</button>
+                </div>
+                <div className='DrumMachine_SettedTempo'>
+                  {beatsPerMinute}
+                </div>
+                <div className='DrumMachine__PatternButton'>
+                  <button onClick={this.tempoDown}>▼</button>
+                </div>
+              </div>
               <div className='DrumMachine__PatternSelector'>
                 <div className='DrumMachine__PatternButton'>
-                  <button onClick={this.previousPattern}>&lt;</button>
+                  <button onClick={this.previousPattern}>◀</button>
                 </div>
                 <div className='DrumMachine__SelectedPattern'>
                   {name}
                 </div>
                 <div className='DrumMachine__PatternButton'>
-                  <button onClick={this.nextPattern}>&gt;</button>
+                  <button onClick={this.nextPattern}>▶</button>
                 </div>
               </div>
               <div className='DrumMachine__Transport'>

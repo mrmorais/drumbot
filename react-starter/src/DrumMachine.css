@@ -82,12 +82,12 @@ button:disabled {
 }
 
 
-.DrumMachine__PatternSelector, .DrumMachine__Transport {
+.DrumMachine__PatternSelector, .DrumMachine__TempoSelector, .DrumMachine__Transport {
   display: flex;
   margin-top: 15px;
 }
 
-.DrumMachine__PatternSelector {
+.DrumMachine__PatternSelector, .DrumMachine__TempoSelector {
   font-family: 'VT323', monospace;
   font-weight: bold;
   color: yellow;
@@ -110,7 +110,7 @@ button:disabled {
   flex: 0 1 30px;
 }
 
-.DrumMachine__SelectedPattern {
+.DrumMachine__SelectedPattern, .DrumMachine_SettedTempo {
   background: black;
   text-align: center;
   background-color: #222222;
@@ -131,8 +131,8 @@ button:disabled {
     text-align: right;
   }
 
-  .DrumMachine__PatternSelector {
-    margin-right: 20px;
+  .DrumMachine__PatternSelector, .DrumMachine__TempoSelector {
+    margin-right: 15px;
   }
 
   .DrumMachine__SelectedPattern {
